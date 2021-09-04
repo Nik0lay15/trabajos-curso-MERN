@@ -1,5 +1,4 @@
 import express from "express";
-import fs from "fs";
 
 let lista_productos = [];
 const app = express();
