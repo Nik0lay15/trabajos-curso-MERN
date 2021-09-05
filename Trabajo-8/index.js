@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 //// Ruta productos
 app.get("/api/productos/listar",(req,res)=>{    
     if(lista_productos == 0){
-        res.json({error:"No hay productos cargados."});
+        res.statusCode(404).json({error:"No hay productos cargados."});
     }else{
         res.json(lista_productos);
     }
@@ -28,7 +28,7 @@ app.get("/api/productos/listar",(req,res)=>{
 app.get("/api/productos/listar/:id",(req,res)=>{
     const busqueda = lista_productos.find(elemento => elemento.id == req.params.id);
     if(busqueda === undefined){
-        res.json({error:"Producto no encontrado."});
+        res.statusCode(404).json({error:"Producto no encontrado."});
     }else{
         res.json(busqueda);
     }
