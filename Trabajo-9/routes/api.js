@@ -1,52 +1,86 @@
 import express from "express";
 const router = express.Router();
 
-let lista_productos = [];
+class Rutas {
+    productos;
+    route;
 
-//// Ruta productos
-router.get("/productos/listar",(req,res)=>{    
-    if(lista_productos == 0){
-        res.status(404).json({error:"No hay productos cargados."});
-    }else{
-        res.status(200).json(lista_productos);
+    constructor(route){
+        this.productos = [];
+        this.route = route;
     }
-});
-// " por ID
-router.get("/productos/listar/:id",(req,res)=>{
-    const busqueda = lista_productos.find(elemento => elemento.id == req.params.id);
-    if(busqueda === undefined){
-        res.status(404).json({error:"Producto no encontrado."});
-    }else{
-        res.status(200).json(busqueda);
+
+    getProductos(path){
+        // Ruta listar productos
+        this.route.get(path,(req,res)=>{
+            if(this.productos == 0){
+                res.status(404).json({error:"No hay productos cargados."});
+            }else{
+                res.status(200).json(this.productos);
+            }
+        });
     }
-});
 
-//// Ruta incorpora producto
-router.post("/productos/guardar/",(req,res)=>{
-    const nuevo_producto = {...req.body,id:lista_productos.length};
-    lista_productos.push(nuevo_producto);
-    res.status(200).json(nuevo_producto);
-});
-
-//// Ruta actualiza producto
-router.put("/productos/actualizar/:id",(req,res)=>{
-    const producto_busqueda = lista_productos.find(elemento => elemento.id == req.params.id);
-    if(producto_busqueda === undefined){
-        res.status(404).json({error:"Producto no encontrado."});
-    }else{
-        res.status(200).json(producto_busqueda);
+    getById(path){
+        // " lista por ID
+        this.route.get(path,(req,res)=>{
+            const busqueda = this.productos.find(elemento => elemento.id == req.params.id);
+            if(busqueda === undefined){
+                res.status(404).json({error:"Producto no encontrado."});
+            }else{
+                res.status(200).json(busqueda);
+            }
+        });
     }
-});
 
-//// Ruta elminina producto
-router.delete("/productos/borrar/:id",(req,res)=>{
-    const id_eliminar = lista_productos.findIndex((elemento)=> elemento.id == req.params.id);
-    if(id_eliminar == -1){
-        res.status(404).json({error:"Producto no encontrado."});
-    }else{
-        res.status(200).json({info:"Producto eliminado.",data:lista_productos[id_eliminar]});
+    postProducto(path){
+        // " agrega un producto
+        this.route.post(path,(req,res)=>{
+            const nuevo_producto = {...req.body,id:this.productos.length};
+            this.productos.push(nuevo_producto);
+            res.status(200).json(nuevo_producto);
+        });
     }
-});
 
+    putActualizar(path){
+        // " actualiza un elemento de los productos
+        this.route.put(path,(req,res)=>{
+            const id = req.params.id;
+            try{
+                // Creo que esta parte la hice medio redundante
+                const {title,price,thumbail} = req.body;
+                this.productos[id] = {...this.productos[id],
+                    title : (title === undefined) ?  this.productos[id].title : title,
+                    price : (price === undefined) ? this.productos[id].price : price,
+                    thumbail : (thumbail === undefined) ? this.productos[id].thumbail : thumbail
+                };
+                res.status(200).json({info:"Producto actualizado",data:this.productos[id]});
+            }catch(error){
+                console.log("Error: ",error);
+                res.status(404).json({info:"Producto no encontrado"});
+            }
+        });
+    }
+
+    deleteProducto(path){
+        // " elimina producto
+        this.route.delete(path,(req,res)=>{
+            const id_eliminar = this.productos.find(elemento => elemento.id == req.params.id);
+            if(id_eliminar === undefined){
+                res.status(404).json({error:"Producto no encontrado."});
+            }else{
+                this.productos = this.productos.filter((elemento) => elemento.id != req.params.id);
+                res.status(200).json({info:"Producto eliminado",data:id_eliminar});
+            }
+        });
+    }
+}
+
+const rutas = new Rutas(router);
+rutas.getProductos("/productos/listar");
+rutas.getById("/productos/listar/:id");
+rutas.postProducto("/productos/guardar/");
+rutas.putActualizar("/productos/actualizar/:id");
+rutas.deleteProducto("/productos/borrar/:id");
 
 export default router;
