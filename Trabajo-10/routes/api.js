@@ -95,5 +95,8 @@ const rutas = new Rutas(router);
 rutas.getProductos("/productos/listar");
 rutas.getById("/productos/listar/:id");
 rutas.postProducto("/productos/guardar/");
+rutas.putActualizar("/productos/actualizar/:id");
+rutas.deleteProducto("/productos/borrar/:id");
+rutas.getMVCProductos("/productos/vista");
 
 export default router;
