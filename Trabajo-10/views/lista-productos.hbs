@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Vista de productos</h1>
+    {{#if lista}}
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Thumbail</th>
+                </tr>   
+            </thead>
+            <tbody>
+                {{#each productos}}
+                <tr>
+                    <td scope="row">{{id}}</th>
+                    <td>{{title}}</th>
+                    <td>${{price}}</th>
+                    <td><img src="{{thumbail}}" class="img-fluid"></th> 
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <h3 class="alert alert-danger">No hay productos</h3>
+        <a href="/"><h5>Volver</h5></a>
+    {{/if}}
+    <a href="/" class="btn btn-primary">Añadir producto</a>
+</div>
