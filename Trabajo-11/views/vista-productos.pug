@@ -1,0 +1,24 @@
+html
+    head
+        include partials/head.pug
+    body 
+        div.container
+            if lista 
+                table.table 
+                    thead 
+                        tr         
+                            th(scope="col") #ID
+                            th(scope="col") Title
+                            th(scope="col") Price
+                            th(scope="col") Thumbail
+                    tbody 
+                        each elementos in productos
+                            tr 
+                                th(scope="row")=elementos.id
+                                td=elementos.title 
+                                td=elementos.price
+                a.btn.btn-primary(href="/") Añadir producto
+            else 
+                h3.alert.alert-danger No hay productos
+                a.btn.btn-primary(href="/") Volver
+

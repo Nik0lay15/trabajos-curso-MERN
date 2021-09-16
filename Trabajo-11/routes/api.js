@@ -1,5 +1,5 @@
 import express from "express";
-const router = express.Router();
+export const router = express.Router();
 
 class Rutas {
     productos;
@@ -81,7 +81,7 @@ class Rutas {
         this.route.get(path,(req,res)=>{
             const lista = this.productos.length>0 ? true : false;
             try{    
-                res.render("lista-productos.hbs",{productos:this.productos,lista});
+                res.render("vista-productos.pug",{productos:this.productos,lista});
             }catch(error){
                 console.log(error);
             }
@@ -93,9 +93,7 @@ const rutas = new Rutas(router);
 
 rutas.getProductos("/productos/listar");
 rutas.getById("/productos/listar/:id");
-rutas.postProducto("/productos/guardar/");
+rutas.postProducto("/productos/guardar");
 rutas.putActualizar("/productos/actualizar/:id");
 rutas.deleteProducto("/productos/borrar/:id");
 rutas.getMVCProductos("/productos/vista");
-
-export default router;
