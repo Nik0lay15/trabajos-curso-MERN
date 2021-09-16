@@ -1,1 +1,1 @@
-Aca estan todos los tps del curso de MERN :)
+Repo y branch principal para los trabajos del curso MERN :D
