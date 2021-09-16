@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <%- include("partials/head.ejs") %>
+    </head>
+    <body>
+       <div class="container-sm">
+           <h1>Ingrese un producto</h1>
+           <form method="POST" action="/api/productos/guardar">
+                <div class="mb-5">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" name="title">
+                </div>
+                <div class="mb-5">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" name="price">
+                </div>
+                <div class="mb-5">
+                    <label for="thumbail" class="form-label">Thumbail</label>
+                    <input type="text" class="form-control" name="thumbail">
+                </div>
+                <input type="submit" class="btn btn-primary" value="Enviar">
+           </form>
+       </div> 
+    </body>
+</html>

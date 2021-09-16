@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <%- include("partials/head.ejs") %>
+    </head>
+    <body>
+       <div class="container">
+            <%if(lista){ %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#ID</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Thumbail</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%productos.forEach((elemento)=>{%>
+                            <tr>
+                                <th scope="row"><%=elemento.id%></th>
+                                <td><%=elemento.title%></td>
+                                <td><%=elemento.price%></td>
+                                <td><%=elemento.thumbail%></td>
+                            </tr>
+                        <%});%>
+                    </tbody>
+                </table>
+                <a href="/" class="btn btn-primary">Agregar producto</a>
+            <%}else{%>
+                <h3 class="alert alert-danger">No hay productos</h3>
+                <a href="/" class="btn btn-primary">Volver</a>
+            <%}%>
+       </div> 
+    </body>
+</html>
