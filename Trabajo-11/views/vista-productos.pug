@@ -17,6 +17,8 @@ html
                                 th(scope="row")=elementos.id
                                 td=elementos.title 
                                 td=elementos.price
+                                td 
+                                    img.rounded(src=elementos.thumbail width=30)
                 a.btn.btn-primary(href="/") Añadir producto
             else 
                 h3.alert.alert-danger No hay productos
