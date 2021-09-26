@@ -11,11 +11,11 @@ const http = require("http").Server(app);
 const io = require("socket.io")(http);
 async function miGuardado(data){
     const {time_info,mail,mensaje} = data;
-    fs.promises.readFile("./public/mensajes.txt","utf-8")
+    fs.promises.readFile(__dirname + "/public/mensajes.txt","utf-8")
     .then((resolve)=>{
         const lista = JSON.parse(resolve);
         lista.push({mail,time_info,mensaje});
-        fs.promises.writeFile("./public/mensajes.txt",JSON.stringify(lista,null,"\t"))
+        fs.promises.writeFile(__dirname + "/public/mensajes.txt",JSON.stringify(lista,null,"\t"))
     })
     .catch(error => console.log(error));
 }
