@@ -1,37 +1,3 @@
 [
-	{
-		"mail": "fasdfsdaf@fdasfs",
-		"time_info": "[0/8/2021 0:57:11]: ",
-		"mensaje": "fdasfasd"
-	},
-	{
-		"mail": "fasdfsdaf@fdasfs",
-		"time_info": "[0/8/2021 0:57:37]: ",
-		"mensaje": "fdasfasd"
-	},
-	{
-		"mail": "fasdfsdaf@fdasfs",
-		"time_info": "[0/8/2021 0:57:37]: ",
-		"mensaje": "fdasfasd"
-	},
-	{
-		"mail": "fasdfsdaf@fdasfs",
-		"time_info": "[0/8/2021 0:57:38]: ",
-		"mensaje": "fdasfasd"
-	},
-	{
-		"mail": "fasdfsdaf@fdasfs",
-		"time_info": "[0/8/2021 0:57:38]: ",
-		"mensaje": "fdasfasd"
-	},
-	{
-		"mail": "fadsfdasf@fdasfdasf",
-		"time_info": "[0/8/2021 0:59:12]: ",
-		"mensaje": "fdasfasdf"
-	},
-	{
-		"mail": "fadsfdasf@fdasfdasf",
-		"time_info": "[0/8/2021 0:59:20]: ",
-		"mensaje": "lmao"
-	}
+
 ]
