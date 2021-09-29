@@ -1,5 +1,6 @@
 const socket = io();
 
+// Funciones
 const enviarMensaje = ()=>{
     const inputs = document.getElementsByClassName("form-control");
     const payload = {    
@@ -28,6 +29,21 @@ const handleSubmit = (e) =>{
     }
 };
 
+
+//// Eventos
+// Historial
+socket.on("historial",(data)=>{
+    const historial = document.getElementById("mensajes");
+
+    for(let item of data){
+        const {mail,time_info,mensaje} = item;
+        const historial_mensaje = document.createElement("p");
+        historial_mensaje.innerHTML = `<p><strong>${mail}</strong> <i style="color:brown">${time_info}</i><span style="color:green">${mensaje}</span></p>`;
+        historial.appendChild(historial_mensaje);
+    }
+});
+
+// Lista de productos
 socket.on("productos",(data)=>{
     let tbody = document.getElementsByTagName("tbody")[0];
     let tr = document.createElement("tr");
@@ -48,6 +64,7 @@ socket.on("productos",(data)=>{
     tbody.appendChild(tr);
 });
 
+// Publica mensaje
 socket.on("publicar_mensaje",(data)=>{
     const {time_info,mail,mensaje} = data;
     

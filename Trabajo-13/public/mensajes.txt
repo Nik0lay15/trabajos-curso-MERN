@@ -1,3 +1,17 @@
 [
-
+	{
+		"mail": "example@mail.com",
+		"time_info": "[3/8/2021 18:58:21]: ",
+		"mensaje": "mensaje 1"
+	},
+	{
+		"mail": "usuario1@mail.com",
+		"time_info": "[3/8/2021 18:58:39]: ",
+		"mensaje": "hola"
+	},
+	{
+		"mail": "usuario3@example.com",
+		"time_info": "[3/8/2021 18:59:5]: ",
+		"mensaje": "mensaje2"
+	}
 ]

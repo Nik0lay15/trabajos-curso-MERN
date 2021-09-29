@@ -6,10 +6,14 @@ const fs = require("fs");
 
 // Globales
 const app = express();
-const PUERTO = 8080;
+const PUERTO = process.env.PORT || 8080;
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
+const mensajes = []; 
+
+// Funciones
 async function miGuardado(data){
+    // Guarda historial
     const {time_info,mail,mensaje} = data;
     fs.promises.readFile(__dirname + "/public/mensajes.txt","utf-8")
     .then((resolve)=>{
@@ -19,6 +23,16 @@ async function miGuardado(data){
     })
     .catch(error => console.log(error));
 }
+function leerHistorial(socket){
+    fs.readFile(__dirname + "/public/mensajes.txt",(error,data) =>{
+        if(error){
+            console.log(error);
+        }else{
+            const historial = JSON.parse(data);
+            socket.emit("historial",historial);
+        }
+    });
+}
 
 // Server
 http.listen(PUERTO,()=>{
@@ -26,6 +40,9 @@ http.listen(PUERTO,()=>{
 });
 io.on("connection",(socket)=>{
     console.log("Connection stablished");
+    leerHistorial(socket)
+
+    // Mensajes del cliente
     socket.on("productos-payload",(data)=>{
         console.log(data);
         io.sockets.emit("productos",data);
