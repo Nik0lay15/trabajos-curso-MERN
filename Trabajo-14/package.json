@@ -1,0 +1,24 @@
+{
+  "name": "trabajo-14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "ServerTStoJS5": "tsc -w",
+    "ServerES6toJS5": "npx babel --watch ./server.es6.js --out-dir babel"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.10.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "socket.io": "^4.2.0"
+  }
+}
