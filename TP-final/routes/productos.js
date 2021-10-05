@@ -1,5 +1,13 @@
+//--> Dependencias
 import { Router } from "express";
-import utils from "../utilities/op-productos.js";
+import Utilities from "../utilities/util_productos.js";
 const router = Router();
+
+//--> Router
+router.get("/listar/:id?",Utilities.getProductos);
+router.post("/agregar",Utilities.postProducto);
+router.patch("/actualizar/:id",Utilities.patchProducto);
+router.put("/actualizar/:id",Utilities.putProducto);
+router.delete("/borrar/:id",Utilities.deleteProducto);
 
 export default router;
