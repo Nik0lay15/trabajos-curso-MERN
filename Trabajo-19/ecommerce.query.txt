@@ -1,0 +1,45 @@
+use ecommerce
+db.productos.insertMany([
+    {"title":"Monitor Samsung 23 pulgadas","price":120,"thumbail":"thumbail.png"},
+    {"title":"Teclado RedDragon mecanico switches cherry","price":580,"thumbail":"thumbail.png"},
+    {"title":"Arduino UNO + protoboard","price":900,"thumbail":"thumbail.png"},
+    {"title":"Mouse inalambrico Logitech 206","price":1280,"thumbail":"thumbail.png"},
+    {"title":"Album Bajo Belgrano por Spinetta Jade","price":1700,"thumbail":"thumbail.png"},
+    {"title":"Tablet grafica Wacom One","price":2300,"thumbail":"thumbail.png"},
+    {"title":"Guitarra criolla Fonseca","price":2860,"thumbail":"thumbail.png"},
+    {"title":"Telefono inalambrico","price":3350,"thumbail":"thumbail.png"},
+    {"title":"Perfume California Valley","price":4320,"thumbail":"thumbail.png"},
+    {"title":"Taza artesanal","price":4990,"thumbail":"thumbail.png"}
+])
+db.mensajes.insertMany([
+    {"mail":"lalialzamily1234b@halumail.com","time":"1634342419","contenido":"Mensaje1"},
+    {"mail":"amm@dikitin.com","time":"1634425219","contenido":"Mensaje2"},
+    {"mail":"nzou.nhbx@eztam.xyz","time":"1637017219","contenido":"Mensaje3"},
+    {"mail":"8ayoub-msyahc@devle.site","time":"1665874819","contenido":"Mensaje4"},
+    {"mail":"1chafik.be@gmailni.com","time":"1949871619","contenido":"Mensaje5"},
+    {"mail":"abastianjousefm@vibi.cf","time":"1634335219","contenido":"Mensaje6"},
+    {"mail":"vwaelahmedanwerl@iissugianto.art","time":"1634252419","contenido":"Mensaje7"},
+    {"mail":"1sabradiaau@eytetlne.com","time":"1631746819","contenido":"Mensaje8"},
+    {"mail":"tbriannacoxpari5@dmxs8.com","time":"1602802819","contenido":"Mensaje9"},
+    {"mail":"tbriannacoxpari5@dmxs8.com","time":"1318719619","contenido":"Mensaje10"},
+])
+
+db.productos.find()
+db.mensajes.find()
+db.productos.count()
+db.mensajes.count()
+
+db.productos.insertOne({"title":"Auriculares Sony","price":"750","thumbail":"thumbail.png"})
+db.productos.find({"price":{"$lt":1000}})
+db.productos.find({"$and":[{"price":{"$gt":1000}},{"price":{"$lt":3000}}]})
+db.productos.find({"price":{"$gt":3000}})
+db.productos.find({},{"title":1}).sort({"price":1}).limit(1).skip(2)
+
+db.prodcutos.updateMany({},{"$set":{"stock":100}})
+
+db.productos.updateMany({"price":{"$gt":4000}},{"$set":{"stock":0}})
+
+db.productos.deleteMany({"price":{"$lt":1000}})
+
+use ecommerce
+db.createUser({ user: "pepe", pwd: "asd455", roles: [{ role: "read", db: "ecommerce" }] })
