@@ -1,0 +1,23 @@
+<div class="container-sm p-3 mb-5 bg-light">
+    {{#if data}}
+        <h1 class="p-3 text-primary">Bienvenido {{{data}}}</h1>
+        <a href="/logout">Logout</a>
+    {{else}}
+        <h1 class="p-3 text-primary">Login de usuario</h1>
+        <form method="post" action="/login">
+            <label fro="username" class="form-label">Username</label>
+            <div class="mb-5">
+                <input type="text" class="form-control" name="username">
+            </div>
+            <label fro="password" class="form-label">Password</label>
+            <div class="mb-5">
+                <input type="text" class="form-control" name="password">
+            </div>
+            <div class="mb-5">
+                <input type="submit" class="btn btn-primary" value="LogIn">
+            </div>
+        </form>
+        <div class="mb-5">
+            <a href="/signin">SignIn</a>
+        </div>
+    {{/if}}
