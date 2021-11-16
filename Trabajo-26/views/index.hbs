@@ -1,6 +1,8 @@
 <div class="container-sm p-3 mb-5 bg-light">
     {{#if data}}
-        <h1 class="p-3 text-primary">Bienvenido {{{data}}}</h1>
+        <h1 class="p-3 text-primary">Bienvenido {{{name}}}</h1>
+        <h1 class="p-3 text-primary">Bienvenido {{{mail}}}</h1>
+        <img src={{{profile_picture}}}>
         <a href="/logout">Logout</a>
     {{else}}
         <h1 class="p-3 text-primary">Login de usuario</h1>

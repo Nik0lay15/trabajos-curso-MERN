@@ -5,8 +5,9 @@ import estrategias from "../autentificacion/aut.js";
 const router = express.Router();
 
 router.get("/",(req,res)=>{
-    if(req.isAuthenticated()){  
-        res.render("index.hbs",{data:req.user.username});
+    if(req.isAuthenticated()){
+        const {name, mail, profile_picture} = req.user;  
+        res.render("index.hbs",{name,mail,profile_picture});
     }else{
         res.render("index.hbs");
     }
