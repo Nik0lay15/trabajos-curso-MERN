@@ -12,7 +12,7 @@ router.get("/",(req,res)=>{
         res.render("index.hbs");
     }
 });
-router.post("/login",passport.authenticate("twitter",{failureRedirect:"/error-log",successRedirect:"/"}));
+router.get("/login",passport.authenticate("twitter",{failureRedirect:"/error-log",successRedirect:"/"}));
 router.get("/error-log",(req,res)=>{
     res.render("error-log.hbs");
 });

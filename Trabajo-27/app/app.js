@@ -1,14 +1,13 @@
-import dotenv from "dotenv";
-dotenv.config({path:"./options/.env"});
-
 import express from "express";
 import handlebars from "express-handlebars";
 import router from "../routes/form.js";
 import session from "express-session";
 import mongoStore from "connect-mongo";
 import passport from "passport";
+import dotenv from "dotenv";
 
 const APP = express();
+dotenv.config({path:"../options/.env"});
 
 APP.use(session({
     store : mongoStore.create({

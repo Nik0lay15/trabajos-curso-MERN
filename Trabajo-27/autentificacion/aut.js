@@ -1,16 +1,18 @@
 import passport from "passport";
 import {Strategy as twitterStrategy} from "passport-twitter";
-import models from "../options/models.js";
 import mongoose from "mongoose";
+import models from "../options/models.js";
+import {CONFIG} from "../options/globals.js";
+
 
 mongoose.connect("mongodb+srv://guest:guest123@tp-25.5gux6.mongodb.net/ecommerce?retryWrites=true&w=majority",{
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+})
 
 const twitter = passport.use(new twitterStrategy({
-        consumerKey: "BshTySks8NFtNTGO2zSbWVJb5",
-        consumerSecret: "ZAPEtnFoLxXxDNp2547NWH2Cyk1x0t1DbKyUbLlDd8faEoCirL",
+        consumerKey: process.argv[3] ||process.env.TWITTER_KEY,
+        consumerSecret: process.argv[4] ||process.env.TWITTER_SECRET,
         callbackURL: `http://localhost:${process.env.PORT}`
     },(accessToken, refreshToken, profile, cb)=>{
         models.USER_MODEL.findOne({"twitterId":profile.id},(error,user)=>{
