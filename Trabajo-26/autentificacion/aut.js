@@ -2,31 +2,37 @@ import passport from "passport";
 import {Strategy as twitterStrategy} from "passport-twitter";
 import models from "../options/models.js";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-mongoose.connect("mongodb+srv://guest:guest123@tp-25.5gux6.mongodb.net/ecommerce?retryWrites=true&w=majority",{
+dotenv.config({path:"./options/.env"});
+
+mongoose.connect(process.env.MONGO_CONNECT,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 const twitter = passport.use(new twitterStrategy({
-        consumerKey: "BshTySks8NFtNTGO2zSbWVJb5",
-        consumerSecret: "ZAPEtnFoLxXxDNp2547NWH2Cyk1x0t1DbKyUbLlDd8faEoCirL",
-        callbackURL: `http://localhost:${process.env.PORT}`
+        consumerKey: process.env.TWITTER_SECRETKEY,
+        consumerSecret: process.env.TWITTER_APPKEY,
+        callbackURL: `http://localhost:${process.env.PORT}/auth/twitter/datos`
     },(accessToken, refreshToken, profile, cb)=>{
-        models.USER_MODEL.findOne({"twitterId":profile.id},(error,user)=>{
+        models.findOne({"twitterId":profile.id},(error,user)=>{
             if(error) return cb(error);
-            console.log(profile);
-            const nuevo_usuario = new models.TWITTER_MODEL({
-                "twitterId":profile.id,
-                "name":profile.displayName,
-                "mail":profile.emails[0].value,
-                "profile_picture":profile.photos[0].value
-            });
-            nuevo_usuario.save((error)=>{
-                if(error) throw(error);
-                return cb(null,nuevo_usuario);
-            });
+            if(user){
+                return cb(null,user);
+            }else{
+                const nuevo_usuario = new models({
+                    "twitterId":profile.id,
+                    "name":profile.displayName,
+                    "profile_picture":profile.photos[0].value
+                });
+                nuevo_usuario.save((error)=>{
+                    if(error) throw(error);
+                    return cb(null,nuevo_usuario);
+                });
+            }         
         });
+        
     }));
 
 
@@ -35,7 +41,7 @@ passport.serializeUser((user,done)=>{
  });
  
 passport.deserializeUser((id,done)=>{
-     models.USER_MODEL.findOne({"twitterId":id},(error,user)=>{
+     models.findOne({"twitterId":id},(error,user)=>{
          if(error) return done(error);
          return done(null,user);
      });

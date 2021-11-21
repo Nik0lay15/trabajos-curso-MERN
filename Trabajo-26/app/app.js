@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config({path:"./options/.env"});
-
 import express from "express";
 import handlebars from "express-handlebars";
 import router from "../routes/form.js";

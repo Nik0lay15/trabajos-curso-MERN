@@ -5,22 +5,28 @@ import estrategias from "../autentificacion/aut.js";
 const router = express.Router();
 
 router.get("/",(req,res)=>{
-    if(req.isAuthenticated()){
-        const {name, mail, profile_picture} = req.user;  
-        res.render("index.hbs",{name,mail,profile_picture});
-    }else{
-        res.render("index.hbs");
-    }
+    res.render("index");
 });
-router.get("/login",passport.authenticate("twitter",{failureRedirect:"/error-log",successRedirect:"/"}));
-router.get("/error-log",(req,res)=>{
-    res.render("error-log.hbs");
+
+router.get("/auth/twitter",passport.authenticate("twitter"));
+router.get("/auth/twitter/datos",passport.authenticate("twitter",{failureRedirect:"/error-log"}),(req,res)=>{
+    if(req.isAuthenticated()){
+        const {twitterId,name,profile_picture} = req.user;
+        res.render("datos",{twitterId,name,profile_picture});
+    }else{
+        res.redirect("/");
+    }
 });
 
 router.get("/logout",(req,res)=>{
-    req.logout();
+    req.logOut();
     req.session.destroy();
+    console.log("Login out");
     res.redirect("/");
+});
+
+router.get("/error-log",(req,res)=>{
+    res.render("error-log");
 });
 
 export default router;
