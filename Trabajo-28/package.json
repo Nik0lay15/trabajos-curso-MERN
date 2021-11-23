@@ -1,0 +1,21 @@
+{
+  "type": "module",
+  "name": "process",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "for": "forever start -w ./app.js",
+    "test": "forever list",
+    "pmfork": "pm2 start ./app2.js -w",
+    "pmcluster":"pm2 start ./app2.js -w -i max"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cluster": "^0.7.7",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
