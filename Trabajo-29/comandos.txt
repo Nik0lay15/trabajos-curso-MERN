@@ -1,0 +1,2 @@
+pm2 start -w ./server/server.js --name="Server01" -- 8081 fork
+pm2 start -w ./server/server.js --name="Server02" -- 8082 cluster
