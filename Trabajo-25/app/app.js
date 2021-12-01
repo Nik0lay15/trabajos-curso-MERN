@@ -5,6 +5,10 @@ import router from "../routes/form.js";
 import session from "express-session";
 import mongoStore from "connect-mongo";
 import passport from "passport";
+import {dirname,join} from "path";
+import {fileURLToPath} from "url";
+
+const __dirname = `${dirname(fileURLToPath(import.meta.url))}/..`;
 
 const APP = express();
 
@@ -33,11 +37,11 @@ APP.use(express.static("./public"));
 APP.engine("hbs",handlebars({
         extname : ".hbs",
         defaultLayout : "base.hbs",
-        layoutsDir : "./views/layouts",
-        partialsDir : "./views/partials"
+        layoutsDir : join(__dirname,"/views/layouts"),
+        partialsDir : join(__dirname,"/views/partials")
     }   
 ));
-APP.set("views","./views");
+APP.set("views",join(__dirname,"/views"));
 APP.set("view engine","hbs");
 
 export default APP;
