@@ -1,0 +1,8 @@
+npm run nodemon_start 8080 CLUSTER 
+npm run nodemon_start 8080 FORK 
+npm run forever_start 8080 CLUSTER || forever list
+npm run forever_start 8080 FORK || forever list 
+tasklist /FI "IMGAGENAME eq node*"
+npm run pm2_cluster 8080
+npm run pm2_fork 8080
+pm2 list

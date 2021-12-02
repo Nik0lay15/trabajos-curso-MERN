@@ -1,0 +1,22 @@
+{
+  "script": "./server/server.js",
+  "name": "Server02",
+  "filter_env": [],
+  "namespace": "default",
+  "args": [
+    "8080"
+  ],
+  "env": {},
+  "merge_logs": true,
+  "vizion": true,
+  "autorestart": true,
+  "watch": false,
+  "instance_var": "NODE_APP_INSTANCE",
+  "pmx": true,
+  "automation": true,
+  "treekill": true,
+  "username": "manuel",
+  "windowsHide": true,
+  "kill_retry_time": 100,
+  "write": true
+}
