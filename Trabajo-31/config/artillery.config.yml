@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:8080"
+  http:
+    timeout: 1000
+  phases: 
+    - duration: 5
+      arrivalRate: 1000
+scenarios: 
+  - name: "Busqueda info"
+    flow:
+      - get:
+          url: "/info"
